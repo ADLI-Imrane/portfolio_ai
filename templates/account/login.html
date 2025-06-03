@@ -1,0 +1,20 @@
+<!-- templates/account/login.html -->
+{% extends "base.html" %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+  <h2 class="text-xl font-semibold mb-4">Se connecter</h2>
+  <form method="post" action="{% url 'account_login' %}" class="space-y-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+      Connexion
+    </button>
+  </form>
+  <p class="mt-4 text-sm">
+    <a href="{% url 'account_reset_password' %}" class="text-blue-600 hover:underline">
+      Mot de passe oublié ?
+    </a>
+  </p>
+{% endblock %}

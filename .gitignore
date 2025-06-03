@@ -1,0 +1,65 @@
+# Environnement virtuel
+env/
+venv/
+ENV/
+.venv/
+
+# Fichiers Python compilés
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Fichiers temporaires
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+*.swp
+*.bak
+
+# Fichiers et dossiers Django
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+static_root/
+static_cdn/
+static/uploads/
+
+# JetBrains IDE (PyCharm, etc.)
+.idea/
+
+# VS Code
+.vscode/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Git
+*.orig
+
+# Tests / coverage
+htmlcov/
+.tox/
+.coverage
+coverage.xml
+.cache
+.pytest_cache/
+
+# Docker
+*.pid
+
+# NodeJS (si React ou autre en frontend)
+node_modules/
+build/
+dist/
+
+# fichiers secrets
+.env
+.env.*
+
+# allauth (fichiers installés dans env ignorés automatiquement)

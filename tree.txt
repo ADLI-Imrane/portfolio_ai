@@ -1,0 +1,17 @@
+﻿.\chatbot
+.\core
+.\env
+.\portfolios
+.\portfolio_ai
+.\static
+.\templates
+.\users
+.\core\utils
+.\env\Include
+.\env\Lib
+.\env\Scripts
+.\env\Lib\site-packages
+.\static\uploads
+.\templates\account
+.\templates\account\email
+.\templates\account\password

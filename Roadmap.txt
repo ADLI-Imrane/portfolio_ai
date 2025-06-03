@@ -1,0 +1,142 @@
+🧠 PHASE 1 – Initialisation et base du projet
+🔹 1.1 – Création et configuration du projet Django
+ Créer un projet Django : django-admin startproject
+
+ Créer l'app users pour la gestion des comptes
+
+ Installer et configurer django-allauth pour :
+
+Authentification par email + mot de passe
+
+Connexion via Google (OAuth2)
+
+🔹 1.2 – Modèle utilisateur personnalisé
+ Créer un modèle CustomUser avec email comme identifiant
+
+ Activer AUTH_USER_MODEL dans settings.py
+
+ Créer CustomUserManager
+
+ Ajouter des champs comme full_name, photo, is_private, etc.
+
+🔹 1.3 – Configuration base de données
+ Utiliser MongoDB ou PostgreSQL pour la flexibilité des données
+
+ Configurer connexion MongoDB (via djongo ou mongoengine)
+
+🎨 PHASE 2 – Portfolio : Modélisation & CRUD
+🔹 2.1 – Modèle Portfolio
+ Champs : title, description, template, data_json, user, is_private, slug, created_at, etc.
+
+🔹 2.2 – Modèles liés (facultatif selon structure)
+ Expérience (Experience)
+
+ Éducation (Education)
+
+ Compétences (Skills)
+
+ Projets (Project)
+
+ Réseaux sociaux (SocialLink)
+
+🔹 2.3 – CRUD & Dashboard
+ Pages d’administration de ses portfolios
+
+ Vue d’un portfolio public/privé avec slug
+
+ Duplication d’un portfolio
+
+🧩 PHASE 3 – Éditeur visuel glisser-déposer (Wix-style)
+🔹 3.1 – Frontend visuel interactif
+ Intégrer ReactJS ou VueJS avec Django
+
+ Ajouter une bibliothèque de glisser-déposer :
+
+react-dnd ou react-beautiful-dnd
+
+craft.js ou grapesjs pour une interface complète
+
+🔹 3.2 – Composants dynamiques
+ Sections : Header, À propos, Projets, Expériences, Contact, etc.
+
+ Style dynamique (taille, couleur, texte) stocké dans un JSON
+
+ Synchronisation live avec la base (API Django + AJAX ou React)
+
+🤖 PHASE 4 – Génération par IA / Chatbot
+🔹 4.1 – Générateur de contenu avec prompt
+ Formulaire prompt : "Décris ton parcours..."
+
+ Intégrer GPT (API OpenAI ou interne)
+
+ Générer un contenu structuré en JSON à insérer dans le portfolio
+
+🔹 4.2 – Chatbot intelligent (optionnel)
+ Interface avec un assistant IA intégré dans l’éditeur
+
+ Proposer des suggestions automatiques
+
+🌐 PHASE 5 – Intégration LinkedIn
+🔹 5.1 – API LinkedIn
+ Créer une app LinkedIn pour obtenir les API Keys
+
+ Ajouter bouton “Importer depuis LinkedIn”
+
+ Utiliser OAuth 2.0 pour récupérer :
+
+Nom, titre, résumé, expériences, formations
+
+ Convertir les données en JSON compatible avec ton éditeur
+
+📊 PHASE 6 – Statistiques & confidentialité
+🔹 6.1 – Statistiques
+ Modèle de logs des visites : PortfolioView
+
+ Compter les vues publiques par date et IP
+
+ Tableau de bord statistique : vue, tendance, pays (via IP)
+
+🔹 6.2 – Mode privé
+ Champ is_private pour chaque portfolio
+
+ Affichage conditionnel si non connecté ou non propriétaire
+
+ Mot de passe ou lien secret (option)
+
+📤 PHASE 7 – Export PDF et sauvegardes
+🔹 7.1 – Export PDF
+ Générer le portfolio au format HTML
+
+ Utiliser WeasyPrint ou xhtml2pdf pour l’export
+
+🔹 7.2 – Sauvegarde automatique
+ Auto-save via AJAX ou WebSocket
+
+ Sauvegarde périodique côté backend (historique des versions)
+
+🧪 PHASE 8 – Tests & validation
+🔹 8.1 – Tests
+ Tests unitaires sur les modèles et vues
+
+ Tests API
+
+ Vérifications UI & UX
+
+🚀 PHASE 9 – Déploiement
+🔹 9.1 – Déploiement sur PythonAnywhere
+ Créer compte & configurer environnement Python 3.x
+
+ Pousser le projet (via Git ou transfert direct)
+
+ Configuration wsgi.py, domaine, static files, DB
+
+ Lier MongoDB Atlas (ou PostgreSQL)
+
+✅ PHASE 10 – Finitions & Bonus
+ Interface mobile responsive (Tailwind ou Bootstrap)
+
+ Système de duplication de modèles de portfolio
+
+ Système de notification (modifications, vues)
+
+ Personnalisation avancée (domaines custom, image de fond, polices)
