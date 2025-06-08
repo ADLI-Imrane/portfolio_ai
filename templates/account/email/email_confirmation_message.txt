@@ -1,5 +1,0 @@
-Bienvenue sur Portfolio AI !
-Merci pour votre inscription.
-
-Veuillez confirmer votre adresse en cliquant sur ce lien :
-{{ activate_url }}

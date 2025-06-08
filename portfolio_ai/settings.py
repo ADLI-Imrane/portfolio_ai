@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'widget_tweaks',
 
     # Auth
     'allauth',
@@ -38,7 +39,6 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
-AUTH_USER_MODEL = 'core.CustomUser'
 
 # 🔁 Middleware
 MIDDLEWARE = [
@@ -119,9 +119,6 @@ configuration.api_key['api-key'] = BREVO_API_KEY
 EMAIL_BACKEND = 'core.email_backends.BrevoEmailBackend'
 DEFAULT_FROM_EMAIL = "Portfolio AI <themrx.test9@gmail.com>"
 ACCOUNT_DEFAULT_FROM_EMAIL = "Portfolio AI <themrx.test9@gmail.com>"
-EMAIL_HOST = 'smtp-relay.brevo.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
 
 
 # ⚙️ Allauth
@@ -146,9 +143,7 @@ ACCOUNT_EMAIL_CONFIRMATION_SUBJECT_TEMPLATE = "account/email/email_confirmation_
 ACCOUNT_EMAIL_CONFIRMATION_HTML_TEMPLATE = "account/email/email_confirmation_message.html"
 
 # ✅ Adapter personnalisé
-ACCOUNT_ADAPTER = "allauth.account.adapter.DefaultAccountAdapter"
-SOCIALACCOUNT_ADAPTER = 'allauth.socialaccount.adapter.DefaultSocialAccountAdapter'
-ACCOUNT_FORMS = {}
+ACCOUNT_FORMS = { 'signup': 'users.forms.CustomSignupForm' }
 
 DEFAULT_DOMAIN = "localhost:8000"
 DEFAULT_PROTOCOL = 'http'

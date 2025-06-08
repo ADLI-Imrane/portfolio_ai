@@ -1,53 +1,40 @@
-# core/email_backends.py
+import os
 from django.core.mail.backends.base import BaseEmailBackend
-from django.conf import settings
-from sib_api_v3_sdk import Configuration, ApiClient
-from sib_api_v3_sdk.api import TransactionalEmailsApi
-from sib_api_v3_sdk.models import SendSmtpEmail
+import sib_api_v3_sdk
+from sib_api_v3_sdk.rest import ApiException
 
 class BrevoEmailBackend(BaseEmailBackend):
     def send_messages(self, email_messages):
-        configuration = Configuration()
-        configuration.api_key['api-key'] = settings.BREVO_API_KEY
-
-        api_instance = TransactionalEmailsApi(ApiClient(configuration))
+        api_key = os.getenv('BREVO_API_KEY')
+        configuration = sib_api_v3_sdk.Configuration()
+        configuration.api_key['api-key'] = api_key
+        api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
         sent_count = 0
-
         for message in email_messages:
+            to_emails = []
+            for addr in message.to:
+                if isinstance(addr, tuple):
+                    to_emails.append({"email": addr[1], "name": addr[0]})
+                else:
+                    to_emails.append({"email": addr})
+            # Use a valid sender email (must be validated in Brevo)
+            sender_email = os.getenv('DEFAULT_FROM_EMAIL', 'themrx.test9@gmail.com')
+            if '<' in sender_email and '>' in sender_email:
+                # Extract email from format: Name <email@domain.com>
+                import re
+                match = re.search(r'<(.+?)>', sender_email)
+                sender_email = match.group(1) if match else sender_email
+            sender = {"email": sender_email, "name": sender_email.split('@')[0]}
+            email = sib_api_v3_sdk.SendSmtpEmail(
+                to=to_emails,
+                subject=message.subject,
+                html_content=message.body,
+                sender=sender,
+            )
             try:
-                html_content = None
-                if hasattr(message, 'alternatives'):
-                    for alt in message.alternatives:
-                        if alt[1] == 'text/html':
-                            html_content = alt[0]
-                            break
-
-                # Parse le nom et email depuis from_email
-                from_name, from_email = self.parse_from_email(message.from_email)
-
-                send_email = SendSmtpEmail(
-                    subject=message.subject,
-                    html_content=html_content or message.body,
-                    text_content=message.body,
-                    sender={"name": from_name, "email": from_email},
-                    to=[{"email": addr} for addr in message.to],
-                )
-                api_instance.send_transac_email(send_email)
+                api_instance.send_transac_email(email)
                 sent_count += 1
-
-            except Exception as e:
+            except ApiException as e:
                 if not self.fail_silently:
-                    raise e
-
+                    raise
         return sent_count
-
-    def parse_from_email(self, from_email):
-        """
-        Gère le format 'Nom <email@ex.com>' ou simplement 'email@ex.com'
-        """
-        if '<' in from_email and '>' in from_email:
-            name = from_email.split('<')[0].strip()
-            email = from_email.split('<')[1].replace('>', '').strip()
-        else:
-            name = email = from_email.strip()
-        return name, email
